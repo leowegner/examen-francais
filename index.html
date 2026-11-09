@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Examen de français · 10 novembre</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <h1>Examen de français</h1>
+      <span class="date-badge">mardi 10 novembre 2026</span>
+    </div>
+    <nav>
+      <button class="tab active" data-tab="home">Accueil</button>
+      <button class="tab" data-tab="verbs">Conjugaison</button>
+      <button class="tab" data-tab="vocab">Famille</button>
+      <button class="tab" data-tab="conn">Connecteurs</button>
+      <button class="tab" data-tab="homo">Homophones</button>
+      <button class="tab" data-tab="actes">Actes de parole</button>
+      <button class="tab" data-tab="avdm">Avoir du mal à</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============ HOME ============ -->
+    <section id="home" class="panel active">
+      <div class="hero">
+        <h2>Programme de l'examen</h2>
+        <p id="countdown" class="countdown"></p>
+      </div>
+      <div class="grid">
+        <button class="topic" data-go="verbs">
+          <span class="t-emoji">✏️</span>
+          <span class="t-name">Présent de l'indicatif</span>
+          <span class="t-desc">Conjugue les 30 verbes irréguliers et réguliers.</span>
+          <span class="t-score" id="hs-verbs"></span>
+        </button>
+        <button class="topic" data-go="vocab">
+          <span class="t-emoji">👨‍👩‍👧‍👦</span>
+          <span class="t-name">Vocabulaire de la famille</span>
+          <span class="t-desc">170 mots : la fiche complète (membres, verbes, B2…).</span>
+          <span class="t-score" id="hs-vocab"></span>
+        </button>
+        <button class="topic" data-go="conn">
+          <span class="t-emoji">🔗</span>
+          <span class="t-name">Connecteurs logiques</span>
+          <span class="t-desc">Chronologie, opposition, cause, conséquence…</span>
+          <span class="t-score" id="hs-conn"></span>
+        </button>
+        <button class="topic" data-go="homo">
+          <span class="t-emoji">🔀</span>
+          <span class="t-name">Homophones</span>
+          <span class="t-desc">c'est · s'est · ses · ces · sais · sait</span>
+          <span class="t-score" id="hs-homo"></span>
+        </button>
+        <button class="topic" data-go="actes">
+          <span class="t-emoji">💬</span>
+          <span class="t-name">Actes de parole</span>
+          <span class="t-desc">Convaincre et proposer quelque chose.</span>
+          <span class="t-score" id="hs-actes"></span>
+        </button>
+        <button class="topic" data-go="avdm">
+          <span class="t-emoji">😅</span>
+          <span class="t-name">Avoir du mal à + inf.</span>
+          <span class="t-desc">L'expression de la difficulté.</span>
+          <span class="t-score" id="hs-avdm"></span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ============ VERBS ============ -->
+    <section id="verbs" class="panel">
+      <div class="toolbar">
+        <label><input type="checkbox" id="verbAccents" /> Ignorer les accents</label>
+        <details>
+          <summary>Choisir les verbes</summary>
+          <div class="actions-inline">
+            <button type="button" id="verbAll" class="link">Tous</button>
+            <button type="button" id="verbNone" class="link">Aucun</button>
+          </div>
+          <div id="verbPicker" class="picker"></div>
+        </details>
+        <span class="score" id="verbScore"></span>
+      </div>
+      <div class="card">
+        <p class="hint">Présent de l'indicatif — conjuga le verbe</p>
+        <h2 id="verbName"></h2>
+        <form id="verbForm" autocomplete="off"></form>
+        <div class="buttons">
+          <button id="verbCheck" class="primary">Vérifier</button>
+          <button id="verbReveal">Voir la réponse</button>
+          <button id="verbNext">Suivant →</button>
+        </div>
+      </div>
+      <details class="card fiche">
+        <summary>📖 Fiche : rappels de conjugaison</summary>
+        <div class="fiche-body">
+          <p><strong>-er</strong> : e, es, e, ons, ez, ent &nbsp;·&nbsp; <strong>-ir</strong> : is, is, it, issons, issez, issent &nbsp;·&nbsp; <strong>-re</strong> : s, s, (t), ons, ez, ent</p>
+          <p><strong>Pièges :</strong> <em>commencer</em> → nous commen<strong>ç</strong>ons · <em>manger</em> → nous mang<strong>e</strong>ons · <em>envoyer</em> → j'envo<strong>ie</strong> mais nous envoy<strong>o</strong>ns</p>
+          <p><strong>Incontournables :</strong> être (suis, es, est, sommes, êtes, sont) · avoir (ai, as, a, avons, avez, ont) · aller (vais, vas, va, allons, allez, vont) · faire (fais, fais, fait, faisons, faites, font)</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============ VOCAB ============ -->
+    <section id="vocab" class="panel">
+      <div class="toolbar">
+        <label><input type="checkbox" id="vocabAccents" /> Ignorer les accents</label>
+        <label><input type="checkbox" id="vocabArticles" checked /> Article facultatif</label>
+        <span class="score" id="vocabScore"></span>
+      </div>
+      <div class="card">
+        <p class="hint" id="vocabHint"></p>
+        <h2 id="vocabWord"></h2>
+        <form id="vocabForm" autocomplete="off">
+          <input id="vocabInput" type="text" placeholder="Ta réponse…" autocapitalize="off" />
+        </form>
+        <p id="vocabFeedback" class="feedback"></p>
+        <div class="buttons">
+          <button id="vocabCheck" class="primary">Vérifier</button>
+          <button id="vocabReveal">Voir la réponse</button>
+          <button id="vocabNext">Suivant →</button>
+        </div>
+      </div>
+      <details class="card fiche">
+        <summary>📖 Fiche : liste complète du vocabulaire</summary>
+        <table id="vocabTable" class="fiche-table"></table>
+      </details>
+    </section>
+
+    <!-- ============ CONNECTEURS ============ -->
+    <section id="conn" class="panel">
+      <div class="toolbar">
+        <span class="score" id="connScore"></span>
+      </div>
+      <div class="card">
+        <p class="hint">Complète la phrase avec le bon connecteur</p>
+        <p id="connSentence" class="sentence"></p>
+        <div id="connOptions" class="options"></div>
+        <p id="connFeedback" class="feedback"></p>
+        <div class="buttons">
+          <button id="connNext" class="primary">Suivant →</button>
+        </div>
+      </div>
+      <details class="card fiche" open>
+        <summary>📖 Fiche : les connecteurs par fonction</summary>
+        <div id="connFiche" class="fiche-body conn-fiche"></div>
+      </details>
+    </section>
+
+    <!-- ============ HOMOPHONES ============ -->
+    <section id="homo" class="panel">
+      <div class="toolbar">
+        <span class="score" id="homoScore"></span>
+      </div>
+      <div class="card">
+        <p class="hint">Choisis le bon homophone : <strong>c'est · s'est · ses · ces · sais · sait</strong></p>
+        <p id="homoSentence" class="sentence"></p>
+        <div id="homoOptions" class="options"></div>
+        <p id="homoFeedback" class="feedback"></p>
+        <div class="buttons">
+          <button id="homoNext" class="primary">Suivant →</button>
+        </div>
+      </div>
+      <details class="card fiche" open>
+        <summary>📖 Fiche : comment les distinguer ?</summary>
+        <div class="fiche-body">
+          <table class="fiche-table">
+            <tr><td><strong>c'est</strong></td><td>= cela est → remplace par <em>cela est</em>. « C'est mon frère. »</td></tr>
+            <tr><td><strong>s'est</strong></td><td>= se + est (verbe pronominal au passé) → remplace par <em>s'est-il/elle…</em> ou <em>s'était</em>. « Il s'est levé. »</td></tr>
+            <tr><td><strong>ses</strong></td><td>possessif + nom pluriel → remplace par <em>mes / tes</em>. « Il range ses affaires. »</td></tr>
+            <tr><td><strong>ces</strong></td><td>démonstratif + nom pluriel → remplace par <em>ce / cette</em>. « Ces enfants sont sages. »</td></tr>
+            <tr><td><strong>sais</strong></td><td>verbe savoir avec <em>je / tu</em>. « Je sais la réponse. »</td></tr>
+            <tr><td><strong>sait</strong></td><td>verbe savoir avec <em>il / elle / on</em>. « Elle sait nager. »</td></tr>
+          </table>
+          <p class="astuce"><strong>Astuce :</strong> si tu peux remplacer par <em>mes</em> → ses · par <em>ce/cette</em> → ces · par <em>cela est</em> → c'est · sinon verbe pronominal → s'est · sinon savoir → sais ou sait (regarde le sujet).</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============ ACTES DE PAROLE ============ -->
+    <section id="actes" class="panel">
+      <div class="toolbar">
+        <span class="score" id="actesScore"></span>
+      </div>
+      <div class="card">
+        <p class="hint">Quelle phrase faut-il dire dans cette situation ?</p>
+        <p id="actesSituation" class="sentence"></p>
+        <div id="actesOptions" class="options"></div>
+        <p id="actesFeedback" class="feedback"></p>
+        <div class="buttons">
+          <button id="actesNext" class="primary">Suivant →</button>
+        </div>
+      </div>
+      <details class="card fiche" open>
+        <summary>📖 Fiche : les actes de parole</summary>
+        <div class="fiche-body conn-fiche">
+          <div class="conn-group">
+            <h5>Proposer quelque chose</h5>
+            <ul>
+              <li>Qu'est-ce que tu penses de … ?</li>
+              <li>Ça te dit de … ?</li>
+              <li>Je te propose de …</li>
+              <li>Pourquoi on ne … (verbe au conditionnel) pas …</li>
+              <li>On pourrait…</li>
+              <li>Ça pourrait être une bonne idée de …</li>
+            </ul>
+          </div>
+          <div class="conn-group">
+            <h5>Convaincre</h5>
+            <ul>
+              <li>Mais tu ne crois pas que …</li>
+              <li>Je t'assure que …</li>
+              <li>Je crois que c'est une bonne occasion pour… / une opportunité pour…</li>
+              <li>Il ne faut pas rater cette opportunité.</li>
+              <li>Tu verras, ça sera… (une expérience formidable)</li>
+              <li>C'est important pour moi, s'il te plaît !</li>
+              <li>J'insiste parce que sincèrement je crois que …</li>
+              <li>J'aimerais tellement que tu + verbe au subjonctif</li>
+              <li>Tu sais que …</li>
+              <li>Il faut que tu comprennes que …</li>
+              <li>Je sais que c'est beaucoup demander mais …</li>
+            </ul>
+          </div>
+          <div class="conn-group">
+            <h5>S'excuser</h5>
+            <ul>
+              <li>Je suis désolé(e). Je regrette.</li>
+              <li>Je te comprends, je te demande pardon.</li>
+              <li>Tu as raison. Je te promets que ça ne se reproduira pas.</li>
+              <li>Je reconnais que c'est de ma faute. Excuse-moi.</li>
+              <li>Je comprends que tu sois fâché(e) mais je te promets que je n'ai pas fait exprès.</li>
+              <li>Est-ce que je peux faire quelque chose pour compenser mon erreur ?</li>
+            </ul>
+          </div>
+          <div class="conn-group">
+            <h5>Demander de l'aide / des conseils</h5>
+            <ul>
+              <li>J'ai besoin de ton aide.</li>
+              <li>J'aimerais que tu m'aides.</li>
+              <li>J'ai un petit problème. Tu crois que tu peux m'aider ?</li>
+              <li>Je ne sais pas quoi faire. Tu as une idée ?</li>
+              <li>Tu pourrais m'aider à trouver une solution, s'il te plaît ?</li>
+              <li>Je cherche une solution parce que … Qu'est-ce que tu crois que je peux faire ?</li>
+              <li>Je suis un peu perdu(e). J'ai besoin de tes conseils.</li>
+              <li>Tu pourrais me donner des conseils pour… ?</li>
+            </ul>
+          </div>
+          <div class="conn-group">
+            <h5>L'accord</h5>
+            <ul>
+              <li>Je suis d'accord avec toi.</li>
+              <li>Je partage ton point de vue.</li>
+              <li>Ça me semble une bonne idée !</li>
+              <li>Je suis pour…</li>
+              <li>Comme toi, je crois que …</li>
+              <li>Nous avons la même opinion sur…</li>
+            </ul>
+          </div>
+          <div class="conn-group">
+            <h5>Le désaccord</h5>
+            <ul>
+              <li>Je ne suis pas d'accord avec toi.</li>
+              <li>Je ne partage pas ton point de vue.</li>
+              <li>Ça ne me semble pas une bonne idée !</li>
+              <li>Je suis contre…</li>
+              <li>Contrairement à toi, je crois que …</li>
+              <li>Nous n'avons pas la même opinion sur…</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============ AVOIR DU MAL ============ -->
+    <section id="avdm" class="panel">
+      <div class="toolbar">
+        <label><input type="checkbox" id="avdmAccents" /> Ignorer les accents</label>
+        <span class="score" id="avdmScore"></span>
+      </div>
+      <div class="card">
+        <p class="hint">Construis la phrase : <strong>avoir du mal à + infinitif</strong></p>
+        <p id="avdmPrompt" class="sentence"></p>
+        <form id="avdmForm" autocomplete="off">
+          <input id="avdmInput" type="text" placeholder="Écris la phrase complète…" autocapitalize="off" />
+        </form>
+        <p id="avdmFeedback" class="feedback"></p>
+        <div class="buttons">
+          <button id="avdmCheck" class="primary">Vérifier</button>
+          <button id="avdmReveal">Voir la réponse</button>
+          <button id="avdmNext">Suivant →</button>
+        </div>
+      </div>
+      <details class="card fiche" open>
+        <summary>📖 Fiche : avoir du mal à + infinitif</summary>
+        <div class="fiche-body">
+          <p><strong>Sens :</strong> exprime une difficulté = « me cuesta / tener dificultad para… »</p>
+          <p><strong>Structure :</strong> sujet + avoir (conjugué) + du mal à + verbe à l'infinitif</p>
+          <ul>
+            <li>J'<strong>ai</strong> du mal <strong>à</strong> comprendre. <em>(Me cuesta entender.)</em></li>
+            <li>Il <strong>a</strong> du mal <strong>à</strong> s'exprimer.</li>
+            <li>Nous <strong>avons</strong> du mal <strong>à</strong> finir les devoirs.</li>
+            <li>Négation : Je n'<strong>ai pas</strong> de mal à parler. <em>(du → de)</em></li>
+          </ul>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
