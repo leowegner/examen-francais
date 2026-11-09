@@ -14,7 +14,7 @@
   --radius: 14px;
 }
 
-* { box-sizing: border-box; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 body {
   margin: 0;
@@ -65,7 +65,12 @@ nav {
 .tab:hover { background: rgba(255,255,255,.12); color: #fff; }
 .tab.active { background: var(--bg); color: var(--primary); }
 
-main { max-width: 860px; margin: 1.6rem auto 3rem; padding: 0 1rem; }
+main {
+  max-width: 860px;
+  margin: 1.6rem auto 3rem;
+  padding: 0 1rem;
+  padding-bottom: env(safe-area-inset-bottom);
+}
 .panel { display: none; }
 .panel.active { display: block; animation: fade .18s ease; }
 @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; } }
@@ -180,7 +185,7 @@ main { max-width: 860px; margin: 1.6rem auto 3rem; padding: 0 1rem; }
 input[type="text"] {
   width: 100%;
   padding: .6rem .8rem;
-  font-size: 1.05rem;
+  font-size: 16px; /* >= 16px evita el zoom automático de iOS */
   border: 1.5px solid var(--border);
   border-radius: 9px;
   outline: none;
@@ -198,6 +203,8 @@ button {
   border: 1.5px solid var(--border);
   background: #fff;
   cursor: pointer;
+  touch-action: manipulation; /* sin delay de doble-tap en móvil */
+  min-height: 44px; /* tap target Apple */
 }
 button:hover { filter: brightness(.96); }
 button.primary { background: var(--primary); color: #fff; border-color: var(--primary); font-weight: 600; }
@@ -235,6 +242,7 @@ button.link { border: none; background: none; color: var(--primary); padding: 0 
   padding: .6rem .9rem;
   border-radius: 0 8px 8px 0;
 }
+.fiche { overflow-x: auto; }
 .fiche-table { width: 100%; border-collapse: collapse; margin-top: .9rem; }
 .fiche-table td { padding: .4rem .55rem; border-bottom: 1px solid var(--border); }
 .fiche-table td:first-child { font-weight: 600; }
@@ -257,8 +265,18 @@ button.link { border: none; background: none; color: var(--primary); padding: 0 
 .conn-group .es { color: var(--muted); font-size: .8rem; display: block; margin-top: .3rem; }
 
 @media (max-width: 600px) {
+  main { margin-top: 1rem; padding: 0 .7rem; }
+  .brand h1 { font-size: 1.15rem; }
+  .tab { padding: .55rem .65rem; font-size: .86rem; }
+  .card { padding: 1.05rem; }
+  .card h2 { font-size: 1.4rem; word-break: break-word; }
+  .sentence { font-size: 1.12rem; }
   .row { grid-template-columns: 55px 1fr; }
   .row .correct { grid-column: 2; }
   .two-col { grid-template-columns: 1fr; }
-  .card h2 { font-size: 1.45rem; }
+  .conn-fiche { grid-template-columns: 1fr; }
+  /* Opciones apiladas a todo lo ancho: fáciles de tocar */
+  .options { flex-direction: column; }
+  .options button { width: 100%; text-align: left; border-radius: 10px; }
+  .buttons button { flex: 1 1 auto; }
 }

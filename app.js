@@ -199,7 +199,7 @@ function nextVerb() {
   $("verbForm").innerHTML = forms.map((f, i) => `
     <div class="row">
       <span class="pron">${i === 0 ? "je / j'" : PRONOUNS[i]}</span>
-      <input type="text" data-i="${i}" autocapitalize="off" spellcheck="false" />
+      <input type="text" data-i="${i}" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" />
       <span class="correct" data-c="${i}"></span>
     </div>`).join("");
   $("verbForm").querySelector("input").focus();

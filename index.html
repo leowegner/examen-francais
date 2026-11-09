@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Examen de français · 10 novembre</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -115,7 +115,7 @@
         <p class="hint" id="vocabHint"></p>
         <h2 id="vocabWord"></h2>
         <form id="vocabForm" autocomplete="off">
-          <input id="vocabInput" type="text" placeholder="Ta réponse…" autocapitalize="off" />
+          <input id="vocabInput" type="text" placeholder="Ta réponse…" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" />
         </form>
         <p id="vocabFeedback" class="feedback"></p>
         <div class="buttons">
@@ -284,7 +284,7 @@
         <p class="hint">Construis la phrase : <strong>avoir du mal à + infinitif</strong></p>
         <p id="avdmPrompt" class="sentence"></p>
         <form id="avdmForm" autocomplete="off">
-          <input id="avdmInput" type="text" placeholder="Écris la phrase complète…" autocapitalize="off" />
+          <input id="avdmInput" type="text" placeholder="Écris la phrase complète…" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" />
         </form>
         <p id="avdmFeedback" class="feedback"></p>
         <div class="buttons">
